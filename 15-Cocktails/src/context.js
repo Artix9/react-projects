@@ -25,7 +25,7 @@ const AppProvider = ({ children }) => {
             name: strDrink,
             image: strDrinkThumb,
             info: strAlcoholic,
-            galss: strGlass,
+            glass: strGlass,
           };
         });
         setCocktails(newCocktails);
