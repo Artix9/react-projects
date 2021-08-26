@@ -18,7 +18,6 @@ function App() {
     let url;
     const urlPage = `&page=${page}`;
     const urlQuery = `&query=${query}`;
-
     if (query) {
       url = `${searchUrl}${clientID}${urlPage}${urlQuery}`;
     } else {
@@ -26,21 +25,21 @@ function App() {
     }
 
     try {
-      const result = await axios(url);
-
+      const response = await fetch(url);
+      const data = await response.json();
       setPhotos((oldPhotos) => {
         if (query && page === 1) {
-          return result.data.results;
+          return data.results;
         } else if (query) {
-          return [...oldPhotos, ...result.data.results];
+          return [...oldPhotos, ...data.results];
         } else {
-          return [...oldPhotos, ...result.data];
+          return [...oldPhotos, ...data];
         }
       });
       setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -69,6 +68,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setPage(1);
+    fetchImages();
   };
 
   return (
