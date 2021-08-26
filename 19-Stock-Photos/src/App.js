@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Photo from './Photo';
@@ -25,14 +26,15 @@ function App() {
     }
 
     try {
-      const response = await fetch(url);
-      const data = await response.json();
+      const result = await axios(url);
 
       setPhotos((oldPhotos) => {
-        if (query) {
-          return [...oldPhotos, ...data.results];
+        if (query && page === 1) {
+          return result.data.results;
+        } else if (query) {
+          return [...oldPhotos, ...result.data.results];
         } else {
-          return [...oldPhotos, ...data];
+          return [...oldPhotos, ...result.data];
         }
       });
       setLoading(false);
@@ -66,7 +68,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchImages();
+    setPage(1);
   };
 
   return (
