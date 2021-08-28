@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
 
   const fetchMovies = async (url) => {
     setIsLoading(true);
+
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -21,11 +22,11 @@ const AppProvider = ({ children }) => {
       } else {
         setError({ show: true, msg: data.Error });
       }
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
