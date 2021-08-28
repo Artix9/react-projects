@@ -7,7 +7,7 @@ const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: '' });
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState('batman');
+  const [query, setQuery] = useState('sup');
 
   const fetchMovies = async (url) => {
     setIsLoading(true);
@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
   }, [query]);
 
   return (
-    <AppContext.Provider value={(isLoading, error, movies, query, setQuery)}>
+    <AppContext.Provider value={{ isLoading, error, movies, query, setQuery }}>
       {children}
     </AppContext.Provider>
   );
