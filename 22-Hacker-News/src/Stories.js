@@ -13,12 +13,26 @@ const Stories = () => {
     <section className='stories'>
       {hits.map((story) => {
         const { objectID, title, num_comments, url, points, author } = story;
+        const storyUrl = 'https://news.ycombinator.com/item?id=';
+        const userUrl = `https://news.ycombinator.com/user?id=${author}`;
 
         return (
           <article key={objectID} className='story'>
-            <h4 className='title'>{title}</h4>
+            <a
+              href={`${storyUrl}${objectID}`}
+              className='title'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {title}
+            </a>
             <p className='info'>
-              {points} points by <span>{author} | </span>
+              {points} points by
+              <span> </span>
+              <a href={userUrl} target='_blank' rel='noopener noreferrer'>
+                {author}
+              </a>
+              <span> | </span>
               {num_comments} comments
             </p>
             <div>
