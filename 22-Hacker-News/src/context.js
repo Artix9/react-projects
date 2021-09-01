@@ -47,6 +47,15 @@ const AppProvider = ({ children }) => {
     fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
   }, [state.query, state.page]);
 
+  useEffect(() => {
+    if (!state.isLoading) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, [state.page]);
+
   return (
     <AppContext.Provider
       value={{ ...state, removeStory, handleSearch, handlePage }}
